@@ -78,6 +78,8 @@ const shared_data = {
     localStorage.removeItem("username");
     this.username = undefined;
   },
+  server_domain: "http://localhost:3000"
+  //server_domain: "https://kaza-pai.cs.bgu.ac.il"
 };
 console.log(shared_data);
 // Vue.prototype.$root.store = shared_data;

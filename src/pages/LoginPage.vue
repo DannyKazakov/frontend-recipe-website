@@ -99,7 +99,6 @@ export default {
           this.$root.store.server_domain +"/Login",
           // "http://132.72.65.211:80/Login",
           // "http://132.73.84.100:80/Login",
-
           {
             username: this.form.username,
             password: this.form.password

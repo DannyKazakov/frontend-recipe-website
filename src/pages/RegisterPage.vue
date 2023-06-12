@@ -66,6 +66,12 @@
         >
           Have length between 5-10 characters long
         </b-form-invalid-feedback>
+        <b-form-invalid-feedback v-if= "!$v.form.password.specialChar">
+          Your password must contain at least 1 special char
+        </b-form-invalid-feedback>
+        <b-form-invalid-feedback v-if= "!$v.form.password.number">
+          Your password must contain at least 1 number
+        </b-form-invalid-feedback>
       </b-form-group>
 
       <b-form-group
@@ -161,7 +167,9 @@ export default {
       },
       password: {
         required,
-        length: (p) => minLength(5)(p) && maxLength(10)(p)
+        length: (p) => minLength(5)(p) && maxLength(10)(p),
+        specialChar:(p) => /(?=.*[@^*!#$%&?=/\-+~ "])/.test(p),
+        number: (p) => /(?=.*\d)/.test(p) 
       },
       confirmedPassword: {
         required,
