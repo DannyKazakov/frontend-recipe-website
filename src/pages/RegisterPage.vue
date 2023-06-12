@@ -255,7 +255,11 @@ export default {
 
           {
             username: this.form.username,
-            password: this.form.password
+            firstname: this.form.firstname,
+            lastname: this.form.lastname,
+            country: this.form.country,
+            password: this.form.password,
+            email: this.form.email
           }
         );
         this.$router.push("/login");
