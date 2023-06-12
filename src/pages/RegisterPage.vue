@@ -24,7 +24,38 @@
           Username alpha
         </b-form-invalid-feedback>
       </b-form-group>
-
+      <b-form-group
+        id="input-group-firstname"
+        label-cols-sm="3"
+        label="First Name:"
+        label-for="firstname"
+      >
+        <b-form-input
+          id="firstname"
+          v-model="$v.form.firstname.$model"
+          type="text"
+          :state="validateState('firstname')"
+        ></b-form-input>
+        <b-form-invalid-feedback v-if="!$v.form.firstname.required">
+          First name is required
+        </b-form-invalid-feedback>
+      </b-form-group>
+      <b-form-group
+        id="input-group-lastname"
+        label-cols-sm="3"
+        label="Last Name:"
+        label-for="lastname"
+      >
+        <b-form-input
+          id="lastname"
+          v-model="$v.form.lastname.$model"
+          type="text"
+          :state="validateState('lastname')"
+        ></b-form-input>
+        <b-form-invalid-feedback v-if="!$v.form.lastname.required">
+          Last name is required
+        </b-form-invalid-feedback>
+      </b-form-group>
       <b-form-group
         id="input-group-country"
         label-cols-sm="3"
@@ -89,7 +120,26 @@
           The confirmed password is not equal to the original password
         </b-form-invalid-feedback>
       </b-form-group>
-
+      <b-form-group
+        id="input-group-email"
+        label-cols-sm="3"
+        label="Email:"
+        label-for="email"
+      >
+        <b-form-input
+          id="email"
+          v-model="$v.form.email.$model"
+          type="text"
+          :state="validateState('email')"
+        ></b-form-input>
+        <b-form-invalid-feedback v-if="!$v.form.email.required">
+          Email is required
+        </b-form-invalid-feedback>
+        <b-form-invalid-feedback
+          v-else-if="!$v.form.email.legal">
+          Not a legal
+        </b-form-invalid-feedback>
+      </b-form-group>
       <b-button type="reset" variant="danger">Reset</b-button>
       <b-button
         type="submit"
@@ -136,8 +186,8 @@ export default {
     return {
       form: {
         username: "",
-        firstName: "",
-        lastName: "",
+        firstname: "",
+        lastname: "",
         country: null,
         password: "",
         confirmedPassword: "",
@@ -156,6 +206,12 @@ export default {
         length: (u) => minLength(3)(u) && maxLength(8)(u),
         alpha
       },
+      firstname: {
+        required
+      },
+      lastname: {
+        required
+      },
       country: {
         required
       },
@@ -166,6 +222,10 @@ export default {
       confirmedPassword: {
         required,
         sameAsPassword: sameAs("password")
+      },
+      email:{
+        required,
+        legal: (mail) => email(mail)
       }
     }
   },
@@ -209,8 +269,8 @@ export default {
     onReset() {
       this.form = {
         username: "",
-        firstName: "",
-        lastName: "",
+        firstname: "",
+        lastname: "",
         country: null,
         password: "",
         confirmedPassword: "",
