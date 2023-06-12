@@ -168,7 +168,7 @@ export default {
       password: {
         required,
         length: (p) => minLength(5)(p) && maxLength(10)(p),
-        specialChar:(p) => /(?=.*[@^*!#$%&?=/\-+~ "])/.test(p),
+        specialChar:(p) => /(?=.*[`!@#$%^&*()_+\-=\\|,.<>?~])/.test(p),
         number: (p) => /(?=.*\d)/.test(p) 
       },
       confirmedPassword: {
