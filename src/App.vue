@@ -32,11 +32,9 @@
               <router-link :to="{ name: 'FamilyRecipes' }">Family Recipes</router-link>
             </b-dropdown-item>
           </b-dropdown>
-        <b-button id="logoutButton"
-        variant="outline-danger"
-        @click="Logout">Logout</b-button>
-        <!-- <router-link :to="{ name: 'main' }">later change</router-link> -->
-      </span>
+          <b-button id="logoutButton" variant="outline-danger" @click="Logout">Logout</b-button>
+          <router-link :to="{ name: 'createRecipes' }" id="busa">create new recipe</router-link>
+        </span>
       
        
     </b-navbar>
@@ -104,7 +102,12 @@ export default {
   color: whitesmoke;
   float:left;
   font-weight: bold;
-  margin-left:500px;
+  margin-left:400px;
+}
+#busa{
+  color: whitesmoke;
+
+  
 }
 
 </style>
