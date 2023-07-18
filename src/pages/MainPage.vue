@@ -50,8 +50,15 @@ export default {
 .RandomRecipes {
   margin: 10px 0 10px;
 }
+#refreshButton{
+  margin-left:30px;
+}
 #refreshButton:hover{
   background-color: silver;
+}
+.loginOption{
+  margin-left:18px;
+  margin-top:10px
 }
 .blur {
   -webkit-filter: blur(5px); /* Safari 6.0 - 9.0 */

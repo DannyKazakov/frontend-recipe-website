@@ -92,7 +92,7 @@ export default {
 
 .recipe-preview .recipe-footer {
   width: 100%;
-  height: 50%;
+  height: 25%;
   overflow: hidden;
 }
 

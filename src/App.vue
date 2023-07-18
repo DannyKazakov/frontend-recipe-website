@@ -1,18 +1,46 @@
 <template>
   <div id="app">
-    <div id="nav">
-      <router-link :to="{ name: 'main' }">Vue Recipes</router-link>|
-      <router-link :to="{ name: 'search' }">Search</router-link>|
+    <b-navbar type="dark" id="nav" class="navbar navbar-dark bg-dark">
+      <div id="navStyle">
+      <router-link :to="{ name: 'main' }">Home</router-link>
+      <router-link :to="{ name: 'search' }">Search</router-link>
+      <router-link :to="{ name: 'about' }">About</router-link>
+      </div>
+      
+      <!-- <router-link :to="{ name: 'main' }">Home</router-link> -->
+      <!-- <router-link :to="{ name: 'search' }">Search</router-link>
+      <router-link :to="{ name: 'about' }">About</router-link> -->
       {{ !$root.store.username }}
-      <span v-if="!$root.store.username">
-        Guest:
-        <router-link :to="{ name: 'register' }">Register</router-link>|
-        <router-link :to="{ name: 'login' }">Login</router-link>|
+      <span class="guestSpan" v-if="!$root.store.username">
+        Hello Guest:
+        <router-link :to="{ name: 'register' }">Register</router-link>
+        |
+        <router-link :to="{ name: 'login' }">Login</router-link>
       </span>
-      <span v-else>
-        {{ $root.store.username }}: <button @click="Logout">Logout</button>|
+      <span class="userSpan" v-else-if="$root.store.username">
+        Welcome {{ $root.store.username }}!
       </span>
-    </div>
+        <span class="userNavItems" v-if="$root.store.username">
+          <b-dropdown text="Personal">
+            <b-dropdown-item>
+              <router-link :to="{ name: 'FavouriteRecipes' }">Favourite Recipes</router-link>
+            </b-dropdown-item>
+            <b-dropdown-item>
+              <router-link :to="{ name: 'MyRecipes' }">My Recipes</router-link>
+            </b-dropdown-item>
+            <b-dropdown-item>
+              <router-link :to="{ name: 'FamilyRecipes' }">Family Recipes</router-link>
+            </b-dropdown-item>
+          </b-dropdown>
+        <b-button id="logoutButton"
+        variant="outline-danger"
+        @click="Logout">Logout</b-button>
+
+      </span>
+      
+       
+    </b-navbar>
+    
     <router-view />
   </div>
 </template>
@@ -45,15 +73,38 @@ export default {
 }
 
 #nav {
-  padding: 30px;
+  padding: 15px;
 }
 
-#nav a {
+#navStyle a {
   font-weight: bold;
-  color: #2c3e50;
+  color: whitesmoke;
+  margin-right:75px;
 }
 
 #nav a.router-link-exact-active {
   color: #42b983;
 }
+.guestSpan{
+  color: whitesmoke;
+  float:left;
+  font-weight: bold;
+  margin-left:750px;
+}
+.guestSpan a:hover{
+  color: limegreen;
+}
+.userSpan{
+  color: whitesmoke;
+  margin-left:200px;
+  font-weight: bold;
+  
+}
+.userNavItems{
+  color: whitesmoke;
+  float:left;
+  font-weight: bold;
+  margin-left:500px;
+}
+
 </style>
