@@ -12,7 +12,7 @@
       </div>
       <ul class="recipe-overview">
         <li>{{ recipe.readyInMinutes }} minutes</li>
-        <li>{{ recipe.aggregateLikes }} likes</li>
+        <li>{{ recipe.popularity }} likes</li>
       </ul>
     </div>
   </router-link>
@@ -72,7 +72,7 @@ export default {
   margin: 10px 10px;
 }
 .recipe-preview > .recipe-body {
-  width: 100%;
+  width: 70%;
   height: 200px;
   position: relative;
 }
@@ -91,7 +91,7 @@ export default {
 }
 
 .recipe-preview .recipe-footer {
-  width: 100%;
+  width: 50%;
   height: 50%;
   overflow: hidden;
 }
@@ -134,8 +134,8 @@ export default {
   box-flex: 1;
   -webkit-flex-grow: 1;
   flex-grow: 1;
-  width: 90px;
+  width: 50px;
   display: table-cell;
-  text-align: center;
+  text-align: left;
 }
 </style>
