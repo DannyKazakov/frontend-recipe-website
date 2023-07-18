@@ -93,7 +93,7 @@ export default {
     },
     async Login() {
       try {
-        alert(this.$root.store.server_domain)
+        
 
         const response = await this.axios.post(
           // "https://test-for-3-2.herokuapp.com/user/Login",
@@ -106,6 +106,7 @@ export default {
             password: this.form.password
           }
         );
+        alert(response.data.message)
         // console.log(response);
         // this.$root.loggedIn = true;
         this.$root.store.login(this.form.username);
