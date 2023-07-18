@@ -1,25 +1,56 @@
 <template>
-  <router-link
-    :to="{ name: 'recipe', params: { recipeId: recipe.id } }"
-    class="recipe-preview"
-  >
-    <div class="recipe-body">
-      <img v-if="image_load" :src="recipe.image" class="recipe-image" />
-    </div>
-    <div class="recipe-footer">
-      <div :title="recipe.title" class="recipe-title">
-        {{ recipe.title }}
+  <div class="recipe-preview">
+    <router-link :to="{ name: 'recipe', params: { recipeId: recipe.id } }">
+       <div class="recipe-body">
+         <img v-if="image_load" :src="recipe.image" class="recipe-image" />
+        </div>
+    
+
+      <div class="recipe-footer">
+        <div :title="recipe.title" class="recipe-title">
+         {{ recipe.title }}
+        
+        </div>
       </div>
-      <ul class="recipe-overview">
+    </router-link>
+    <b-row class="recipeWatch">
+      <b-col>
+            <img v-if="recipe.wasWatched" src="../assets/images/eyeLogo.png"/>
+            <img v-else-if="!recipe.wasWatched" src="../assets/images/closedEyeLogo.png"/>
+      </b-col>
+      <b-col>
+          <img v-if="!recipe.savedToFavourites" @click="busa(recipe.id)" :src="currentHeart"/>
+          <img v-else-if="recipe.savedToFavourites" src="../assets/images/fullHeart.png"/>
+      </b-col>
+            
+    </b-row>
+
+    <ul class="recipe-overview">
         <li>{{ recipe.readyInMinutes }} minutes</li>
         <li>{{ recipe.popularity }} likes</li>
-      </ul>
-    </div>
-  </router-link>
+    </ul>
+    <ul class="recipe-overview">
+        <li v-if="recipe.vegan">vegan</li>
+        <li v-else >not vegan</li>
+        <li v-if="recipe.vegetarian">vegetarian</li>
+        <li v-else >not vegetarian</li>
+    </ul>
+    <ul v-if="recipe.glutenFree" class="recipe-overview">
+        <li >gluten free</li>
+    </ul>
+    <ul v-else-if="!recipe.glutenFree" class="recipe-overview">
+        <li >contains gluten</li>
+    </ul> 
+  </div>
+ 
 </template>
 
 <script>
 export default {
+  name:"RecipePreview",
+  created(){
+    this.currentHeart = require("../assets/images/emptyHeart.png")
+  },
   mounted() {
     this.axios.get(this.recipe.image).then((i) => {
       this.image_load = true;
@@ -27,38 +58,27 @@ export default {
   },
   data() {
     return {
-      image_load: false
+      image_load: false,
+      currentHeart:""
     };
   },
+  methods:{
+    busa(id){
+      if(!this.recipe.savedToFavourites && this.$root.store.username)
+      {
+        this.$emit('addFave', id)
+        this.currentHeart = require("../assets/images/fullHeart.png")
+      }
+      
+    }
+  },
+
   props: {
     recipe: {
       type: Object,
       required: true
     }
 
-    // id: {
-    //   type: Number,
-    //   required: true
-    // },
-    // title: {
-    //   type: String,
-    //   required: true
-    // },
-    // readyInMinutes: {
-    //   type: Number,
-    //   required: true
-    // },
-    // image: {
-    //   type: String,
-    //   required: true
-    // },
-    // aggregateLikes: {
-    //   type: Number,
-    //   required: false,
-    //   default() {
-    //     return undefined;
-    //   }
-    // }
   }
 };
 </script>
@@ -92,7 +112,7 @@ export default {
 
 .recipe-preview .recipe-footer {
   width: 100%;
-  height: 25%;
+  height: 15%;
   overflow: hidden;
 }
 
@@ -138,4 +158,14 @@ export default {
   display: table-cell;
   text-align: left;
 }
+.recipe-overview{
+  display: inline-block;
+  list-style-type: none
+}
+.recipeWatch{
+  padding-right:3px;
+  padding-top: 3px;
+
+}
+
 </style>

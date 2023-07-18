@@ -18,7 +18,7 @@
         <router-link :to="{ name: 'login' }">Login</router-link>
       </span>
       <span class="userSpan" v-else-if="$root.store.username">
-        Welcome {{ $root.store.username }}!
+        Welcome "{{ $root.store.username }}"!
       </span>
         <span class="userNavItems" v-if="$root.store.username">
           <b-dropdown text="Personal">
@@ -35,7 +35,7 @@
         <b-button id="logoutButton"
         variant="outline-danger"
         @click="Logout">Logout</b-button>
-
+        <!-- <router-link :to="{ name: 'main' }">later change</router-link> -->
       </span>
       
        

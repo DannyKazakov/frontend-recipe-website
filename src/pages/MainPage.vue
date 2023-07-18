@@ -52,6 +52,7 @@ export default {
 }
 #refreshButton{
   margin-left:30px;
+  margin-top: 30px
 }
 #refreshButton:hover{
   background-color: silver;
