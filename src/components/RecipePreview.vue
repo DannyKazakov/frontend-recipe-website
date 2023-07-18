@@ -66,13 +66,13 @@ export default {
 <style scoped>
 .recipe-preview {
   display: inline-block;
-  width: 90%;
+  width: 95%;
   height: 100%;
   position: relative;
   margin: 10px 10px;
 }
 .recipe-preview > .recipe-body {
-  width: 70%;
+  width: 100%;
   height: 200px;
   position: relative;
 }
@@ -91,7 +91,7 @@ export default {
 }
 
 .recipe-preview .recipe-footer {
-  width: 50%;
+  width: 100%;
   height: 50%;
   overflow: hidden;
 }
