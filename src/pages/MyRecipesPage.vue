@@ -1,6 +1,6 @@
 <template>
   <div class="container">
-      <h1>My Recipes</h1>
+      <h1><b>My Recipes</b></h1>
       <router-link to="/" exact>ET Go Home</router-link>
     </div>
 </template>
