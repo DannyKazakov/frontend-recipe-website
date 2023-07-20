@@ -15,6 +15,14 @@
         <RecipePreview v-on:addFave="addToFavourites" class="recipePreview" :recipe="r" />
       </b-col>
     </b-row>
+
+    <div v-if="title=='Favourite Recipes'">
+      <b-row v-for="index in favoritesRange" :key="index">
+        <b-col v-for="r in recipesForFavorites(index)" :key="r.id">
+        <RecipePreview class="recipePreview" :recipe="r" />
+      </b-col>
+      </b-row> 
+    </div>
     <div v-if="title=='Search Results'">
       <b-row v-for="index in searchResultsRange" :key="index">
         <b-col v-for="r in recipesForSearchResults(index)" :key="r.id">
@@ -41,13 +49,18 @@ export default {
     searchResults:{
       type:Array,
       required: false
+    },
+    favorites:{
+      type:Array,
+      required:false
     }
   },
   data() {
     return {
       randomRecipes: [],
       lastRecipes:[],
-      rangeOfSearchResults:0
+      rangeOfSearchResults:0,
+      
     };
   },
   mounted() {
@@ -108,15 +121,24 @@ async addToFavourites(id){
   }
 },
     recipesForSearchResults(index){
-      return this.searchResults.slice((index - 1)*5, index*5)
+      return this.searchResults.slice((index - 1)*3, index*3)
+    },
+    recipesForFavorites(index){
+      return this.favorites.slice((index - 1)*3, index*3)
     }
   },
   computed:{
     searchResultsRange(){
-      if(this.searchResults.length < 5){
+      if(this.searchResults.length < 3){
         return this.searchResults.length
       }
-      return Math.ceil(this.searchResults.length/5)
+      return Math.ceil(this.searchResults.length/3)
+    },
+    favoritesRange(){
+      if(this.favorites.length < 3){
+        return this.favorites.length
+      }
+      return Math.ceil(this.favorites.length/3)
     }
   }
   
