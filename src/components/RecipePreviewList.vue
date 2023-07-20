@@ -15,6 +15,13 @@
         <RecipePreview v-on:addFave="addToFavourites" class="recipePreview" :recipe="r" />
       </b-col>
     </b-row>
+    <div v-if="title=='Search Results'">
+      <b-row v-for="index in searchResultsRange" :key="index">
+        <b-col v-for="r in recipesForSearchResults(index)" :key="r.id">
+        <RecipePreview v-on:addFave="addToFavourites" class="recipePreview" :recipe="r" />
+      </b-col>
+      </b-row> 
+    </div>
   </b-container>
 </template>
 
@@ -30,12 +37,17 @@ export default {
     title: {
       type: String,
       required: true
+    },
+    searchResults:{
+      type:Array,
+      required: false
     }
   },
   data() {
     return {
       randomRecipes: [],
-      lastRecipes:[]
+      lastRecipes:[],
+      rangeOfSearchResults:0
     };
   },
   mounted() {
@@ -94,8 +106,19 @@ async addToFavourites(id){
   }catch(error){
     console.log(error.data)
   }
-}
+},
+    recipesForSearchResults(index){
+      return this.searchResults.slice((index - 1)*5, index*5)
+    }
   },
+  computed:{
+    searchResultsRange(){
+      if(this.searchResults.length < 5){
+        return this.searchResults.length
+      }
+      return Math.ceil(this.searchResults.length/5)
+    }
+  }
   
 };
 </script>

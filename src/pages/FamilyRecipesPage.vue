@@ -1,7 +1,6 @@
 <template>
     <div class="container">
         <h1><b>Family Recipes</b></h1>
-        <router-link to="/" exact>ET Go Home</router-link>
         <!-- <b-carousel id="family-recipes-carousel" controls indicators>
             <div v-for="(recipe, index) in familyRecipes" :key="index">
                 <b-carousel-slide>
