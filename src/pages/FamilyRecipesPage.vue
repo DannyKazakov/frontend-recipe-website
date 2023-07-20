@@ -21,7 +21,7 @@
         </b-carousel> -->
         <div v-for="(recipe, index) in familyRecipes" :key="index" @click="toggleRecipeDetails(recipe)">
             <div class="recipe-container" 
-            :style="{ cursor: isHover(recipe) ? 'pointer' : 'default', backgroundColor: recipe.showBackground ? '#f9f9f9' : 'transparent' }"
+            :style="{ cursor: isHover(recipe) ? 'pointer' : 'default', backgroundColor: recipe.showBackground ? 'rgba(255, 165, 0, 0.2)' : 'transparent' }"
             @mouseover="setHover(recipe, true)" 
             @mouseleave="setHover(recipe, false)">
                 <h2>{{ recipe.title }}</h2>
@@ -206,8 +206,10 @@
     color: #4CAF50;
     margin-bottom: 5px;
     }
-    .recipe-container:hover {
-    background-color: #f9f9f9;
-    }
     
+    /* .recipe-container:hover {
+    background-color: #f9f9f9;
+    } */
+    
+
 </style>
