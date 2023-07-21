@@ -20,9 +20,14 @@ import {
   CardPlugin,
   NavbarPlugin,
   FormSelectPlugin,
+  CarouselPlugin,
   AlertPlugin,
   ToastPlugin,
   LayoutPlugin,
+  ListGroupPlugin,
+  TooltipPlugin,
+  SpinnerPlugin
+  
 } from "bootstrap-vue";
 [
   FormGroupPlugin,
@@ -31,10 +36,16 @@ import {
   ButtonPlugin,
   CardPlugin,
   NavbarPlugin,
+  CarouselPlugin,
   FormSelectPlugin,
   AlertPlugin,
   ToastPlugin,
   LayoutPlugin,
+  ListGroupPlugin,
+  TooltipPlugin,
+  SpinnerPlugin
+   
+
 ].forEach((x) => Vue.use(x));
 Vue.use(Vuelidate);
 
