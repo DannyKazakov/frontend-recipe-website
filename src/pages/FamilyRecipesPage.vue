@@ -1,6 +1,6 @@
 <template>
-    <div class="container">
-        <h1><b>Family Recipes</b></h1>
+    <div class="family-container">
+        <h1 class="family-header"><b>Family Recipes</b></h1>
         <!-- <b-carousel id="family-recipes-carousel" controls indicators>
             <div v-for="(recipe, index) in familyRecipes" :key="index">
                 <b-carousel-slide>
@@ -23,9 +23,9 @@
             :style="{ cursor: isHover(recipe) ? 'pointer' : 'default', backgroundColor: recipe.showBackground ? '#f9f9f9' : 'transparent' }"
             @mouseover="setHover(recipe, true)" 
             @mouseleave="setHover(recipe, false)">
-                <h2>{{ recipe.title }}</h2>
+                <h2 class="family-recipe-title">{{ recipe.title }}</h2>
                 <p v-if="!recipe.showDetails">{{ recipe.text }}</p>
-                <img v-if="recipe.showDetails" :src="recipe.imageUrl" alt="Recipe Image" class="recipe-image" />
+                <img v-if="recipe.showDetails" :src="recipe.imageUrl" alt="Recipe Image" class="family-recipe-image" />
                 <ul v-if="recipe.showDetails">
                     <li v-for="(slide, slideIndex) in recipe.slides" :key="slideIndex">
                         <h3>{{ slide.caption }}</h3>
@@ -148,13 +148,13 @@
 </script>
   
 <style>
-    .container {
+    .family-container {
     max-width: 900px;
     margin: 0 auto;
     padding: 20px;
     }
 
-    h1 {
+    .family-header {
     font-size: 36px;
     text-align: center;
     margin-bottom: 20px;
@@ -173,7 +173,7 @@
     margin-bottom: 20px;
     }
 
-    h2 {
+    .family-recipe-title {
     font-size: 24px;
     color: #4CAF50;
     margin-bottom: 10px;
@@ -186,21 +186,21 @@
     margin-bottom: 10px;
     }
 
-    p {
+    .recipe-container p {
     font-size: 16px;
     line-height: 1.6;
     }
 
-    ul {
+    .recipe-container ul {
     list-style-type: disc;
     margin-left: 30px;
     }
 
-    li {
+    .recipe-container li {
     margin-bottom: 10px;
     }
 
-    h3 {
+    .recipe-container h3 {
     font-size: 20px;
     color: #4CAF50;
     margin-bottom: 5px;

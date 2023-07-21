@@ -45,6 +45,9 @@ export default {
   name:"RecipePreview",
   created(){
     this.currentHeart = require("../assets/images/emptyHeart.png")
+    if(this.recipe.image ==="" || this.recipe.image == null){
+      this.recipe.image = require("../assets/images/image_not_available.png")
+    }
   },
   mounted() {
     this.axios.get(this.recipe.image).then((i) => {
