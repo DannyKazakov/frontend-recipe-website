@@ -1,46 +1,41 @@
 <template>
   <div class="recipe-preview">
     <router-link :to="{ name: 'recipe', params: { recipeId: recipe.id } }">
-       <div class="recipe-body">
          <img v-if="image_load" :src="recipe.image" class="recipe-image" />
-        </div>
-    
-
-      <div class="recipe-footer">
-        <div :title="recipe.title" class="recipe-title">
          {{ recipe.title }}
-        
-        </div>
-      </div>
-    </router-link>
-    <b-row class="recipeWatch">
+        </router-link>
+         <div class = "recipe-body">
+          <div class="text">
+      <b-row>
       <b-col>
-            <img v-if="recipe.wasWatched" src="../assets/images/eyeLogo.png"/>
-            <img v-else-if="!recipe.wasWatched" src="../assets/images/closedEyeLogo.png"/>
+            <img class="recipeWatch" v-if="recipe.wasWatched" src="../assets/images/eyeLogo.png"/>
+            <img class="recipeWatch" v-else-if="!recipe.wasWatched" src="../assets/images/closedEyeLogo.png"/>
       </b-col>
       <b-col>
-          <img v-if="!recipe.savedToFavourites" @click="busa(recipe.id)" :src="currentHeart"/>
-          <img v-else-if="recipe.savedToFavourites" src="../assets/images/fullHeart.png"/>
+          <img class="recipeWatch" v-if="!recipe.savedToFavourites" @click="busa(recipe.id)" :src="currentHeart"/>
+          <img class="recipeWatch" v-else-if="recipe.savedToFavourites" src="../assets/images/fullHeart.png"/>
       </b-col>
             
     </b-row>
 
-    <ul class="recipe-overview">
-        <li>{{ recipe.readyInMinutes }} minutes</li>
-        <li>{{ recipe.popularity }} likes</li>
-    </ul>
-    <ul class="recipe-overview">
-        <li v-if="recipe.vegan">vegan</li>
-        <li v-else >not vegan</li>
-        <li v-if="recipe.vegetarian">vegetarian</li>
-        <li v-else >not vegetarian</li>
-    </ul>
-    <ul v-if="recipe.glutenFree" class="recipe-overview">
-        <li >gluten free</li>
-    </ul>
-    <ul v-else-if="!recipe.glutenFree" class="recipe-overview">
-        <li >contains gluten</li>
-    </ul> 
+    <b-row>
+        <b-col>{{ recipe.readyInMinutes }} minutes</b-col>
+        <b-col>{{ recipe.popularity }} likes</b-col>
+    </b-row>
+    <b-row>
+        <b-col v-if="recipe.vegan">vegan</b-col>
+        <b-col v-else >not vegan</b-col>
+        <b-col v-if="recipe.vegetarian">vegetarian</b-col>
+        <b-col v-else >not vegetarian</b-col>
+    </b-row>
+    <b-row v-if="recipe.glutenFree">
+        <b-col >gluten free</b-col>
+    </b-row>
+    <b-row v-else-if="!recipe.glutenFree">
+        <b-col >contains gluten</b-col>
+    </b-row>
+          </div>
+         </div>
   </div>
  
 </template>
@@ -50,6 +45,9 @@ export default {
   name:"RecipePreview",
   created(){
     this.currentHeart = require("../assets/images/emptyHeart.png")
+    if(this.recipe.image ==="" || this.recipe.image == null){
+      this.recipe.image = require("../assets/images/image_not_available.png")
+    }
   },
   mounted() {
     this.axios.get(this.recipe.image).then((i) => {
@@ -85,13 +83,65 @@ export default {
 
 <style scoped>
 .recipe-preview {
+  position: relative;
+  width: 50%;
+}
+
+.recipe-image {
+  opacity: 1;
+  display: block;
+  width: 200%;
+  height: auto;
+  transition: .5s ease;
+  backface-visibility: hidden;
+}
+
+.recipe-body {
+  transition: .5s ease;
+  opacity: 0;
+  position: absolute;
+  top: 39%;
+  left: 100%;
+  width: 300px;
+  transform: translate(-50%, -50%);
+  -ms-transform: translate(-50%, -50%);
+  text-align: center;
+}
+
+.recipe-preview:hover .recipe-image {
+  opacity: 0.3;
+}
+
+.recipe-preview:hover .recipe-body {
+  opacity: 1;
+}
+
+.text {
+  background-color: aliceblue;
+  color: black;
+  font-size: 15px;
+  font:bold ;
+
+  
+}
+.recipeWatch{
+  opacity: 1;
+  width: 50%;
+  transition: .5s ease;
+}
+
+.recipe-overview{
+  display: inline-block;
+  list-style-type: none
+}
+/* .recipe-preview {
   display: inline-block;
   width: 95%;
   height: 100%;
   position: relative;
   margin: 10px 10px;
-}
-.recipe-preview > .recipe-body {
+} */
+/* .recipe-preview > .recipe-body {
   width: 100%;
   height: 200px;
   position: relative;
@@ -127,7 +177,7 @@ export default {
   text-overflow: ellipsis;
 }
 
-.recipe-preview .recipe-footer ul.recipe-overview {
+ul.recipe-overview {
   padding: 5px 10px;
   width: 100%;
   display: -webkit-box;
@@ -146,7 +196,7 @@ export default {
   margin-bottom: 0px;
 }
 
-.recipe-preview .recipe-footer ul.recipe-overview li {
+ul.recipe-overview li {
   -webkit-box-flex: 1;
   -moz-box-flex: 1;
   -o-box-flex: 1;
@@ -166,6 +216,6 @@ export default {
   padding-right:3px;
   padding-top: 3px;
 
-}
+} */
 
 </style>
