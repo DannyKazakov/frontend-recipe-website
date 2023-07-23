@@ -212,7 +212,7 @@ export default {
       if (this.newCreatedRecipe.newRecipePreview.glutenFree === true) {
         this.$root.toast("Info"
         ,'Please pay attention!\n'+
-        ' We would appreciate it if you would check again that the recipe is indeed gluten free', "info");
+        ' We would appreciate it if you would check again that the recipe is indeed gluten free!', "info");
       }
     },
 
@@ -220,7 +220,7 @@ export default {
       if (this.newCreatedRecipe.newRecipePreview.vegan === true) {
         this.$root.toast("Info"
         ,'Please pay attention!\n'+
-        ' We would appreciate it if you would check again that the recipe is indeed vegan', "info");
+        ' We would appreciate it if you would check again that the recipe is indeed vegan!', "info");
         //this.newCreatedRecipe.vegan = "yes";
       }
       // else{
@@ -233,7 +233,7 @@ export default {
       if (this.newCreatedRecipe.newRecipePreview.vegetarian === true) {
         this.$root.toast("Info"
         ,'Please pay attention!\n'+
-        ' We would appreciate it if you would check again that the recipe is indeed vegetarian', "info");
+        ' We would appreciate it if you would check again that the recipe is indeed vegetarian!', "info");
       }
     },
 
