@@ -26,7 +26,8 @@ import {
   LayoutPlugin,
   ListGroupPlugin,
   TooltipPlugin,
-  SpinnerPlugin
+  SpinnerPlugin,
+  ModalPlugin
   
 } from "bootstrap-vue";
 [
@@ -43,7 +44,8 @@ import {
   LayoutPlugin,
   ListGroupPlugin,
   TooltipPlugin,
-  SpinnerPlugin
+  SpinnerPlugin,
+  ModalPlugin,
    
 
 ].forEach((x) => Vue.use(x));
