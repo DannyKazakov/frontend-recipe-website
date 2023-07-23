@@ -30,6 +30,13 @@
       </b-col>
       </b-row> 
     </div>
+    <div v-if="title=='My Recipes'">
+      <b-row v-for="index in myRecipesRange" :key="index">
+        <b-col v-for="r in recipesFormyRecipes(index)" :key="r.id">
+        <RecipePreview class="recipePreview" :recipe="r" />
+      </b-col>
+      </b-row> 
+    </div>
   </b-container>
 </template>
 
@@ -51,6 +58,10 @@ export default {
       required: false
     },
     favorites:{
+      type:Array,
+      required:false
+    },
+    my_recipes:{
       type:Array,
       required:false
     }
@@ -125,6 +136,9 @@ async addToFavourites(id){
     },
     recipesForFavorites(index){
       return this.favorites.slice((index - 1)*3, index*3)
+    },
+    recipesFormyRecipes(index){
+      return this.my_recipes.slice((index - 1)*3, index*3)
     }
   },
   computed:{
@@ -139,6 +153,12 @@ async addToFavourites(id){
         return this.favorites.length
       }
       return Math.ceil(this.favorites.length/3)
+    },
+    myRecipesRange(){
+      if(this.my_recipes.length < 3){
+        return this.my_recipes.length
+      }
+      return Math.ceil(this.my_recipes.length/3)
     }
   }
   

@@ -32,19 +32,29 @@
               <router-link :to="{ name: 'FamilyRecipes' }">Family Recipes</router-link>
             </b-dropdown-item>
           </b-dropdown>
+          <b-button v-if="$root.store.username" id="createRecipesPage" @click="showCreateRecipeModal">create new recipe</b-button>
           <b-button id="logoutButton" variant="outline-danger" @click="Logout">Logout</b-button>
-          <router-link :to="{ name: 'createRecipes' }" id="busa">create new recipe</router-link>
-        </span>
-      
-       
+        </span>       
     </b-navbar>
     
     <router-view />
+    
+
+    <b-modal ref="newRecipe-modal" hide-footer title="Create a recipe">
+      <div class="d-block text-center">
+        <createRecipesPage v-on:close="hideCreateRecipeModal">
+        </createRecipesPage>
+      </div>
+      <b-button class="mt-3" variant="outline-primary" block @click="hideCreateRecipeModal">Close</b-button>
+    </b-modal>
+  
   </div>
 </template>
 
 <script>
+import CreateRecipesPage from './pages/CreateRecipesPage.vue';
 export default {
+  components: { CreateRecipesPage },
   name: "App",
   methods: {
     Logout() {
@@ -54,9 +64,20 @@ export default {
       this.$router.push("/").catch(() => {
         this.$forceUpdate();
       });
-    }
+    },
+    
+    showCreateRecipeModal(){
+      this.$refs["newRecipe-modal"].show();
+    },
+        
+    hideCreateRecipeModal(){
+      this.$refs["newRecipe-modal"].hide();
+    },
+    
+  
   }
 };
+
 </script>
 
 <style lang="scss">
