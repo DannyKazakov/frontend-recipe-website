@@ -51,7 +51,7 @@
             type="text"
             :state="validateState('servings')">
           </b-form-input>
-          <b-form-invalid-feedback v-if="!$v.newCreatedRecipe.servings.number">
+          <b-form-invalid-feedback v-if="!$v.newCreatedRecipe.servings.required">
           servings are required 
           </b-form-invalid-feedback>
           <b-form-invalid-feedback v-if="!$v.newCreatedRecipe.servings.number">
