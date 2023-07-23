@@ -10,7 +10,6 @@
       <!-- <router-link :to="{ name: 'main' }">Home</router-link> -->
       <!-- <router-link :to="{ name: 'search' }">Search</router-link>
       <router-link :to="{ name: 'about' }">About</router-link> -->
-      {{ !$root.store.username }}
       <span class="guestSpan" v-if="!$root.store.username">
         Hello Guest:
         <router-link :to="{ name: 'register' }">Register</router-link>
@@ -101,10 +100,10 @@ export default {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  color: #2c3e50;
+  color: #444742;
   min-height: 100vh;
-  // background-image:url("assets/images/recipe_background3.jpg");
-  // background-size: cover;
+  background-image:url("assets/images/recipe_background3.jpg");
+  background-size: cover;
 
 }
 
@@ -117,7 +116,9 @@ export default {
   color: whitesmoke;
   margin-right:75px;
 }
-
+.navbar.navbar-dark.bg-dark{
+    background-color: #365e66!important;
+ }
 #nav a.router-link-exact-active {
   color: #42b983;
 }

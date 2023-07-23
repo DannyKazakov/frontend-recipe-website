@@ -183,7 +183,8 @@ export default {
 
 <style scoped>
     .full-recipe-container {
-    background-color: #f9f9f9;
+      background-image:url("../assets/images/recipe_background3.jpg");
+  background-size: cover;
     padding: 20px;
     border-radius: 5px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);

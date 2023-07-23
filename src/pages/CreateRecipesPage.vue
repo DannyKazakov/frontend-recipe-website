@@ -210,13 +210,17 @@ export default {
     },
     checkGlutenFree(){
       if (this.newCreatedRecipe.newRecipePreview.glutenFree === true) {
-        alert('Please pay attention! We would appreciate it if you would check again that the recipe is indeed gluten-free');
+        this.$root.toast("Info"
+        ,'Please pay attention!\n'+
+        ' We would appreciate it if you would check again that the recipe is indeed gluten free', "info");
       }
     },
 
     veganCheck(){
       if (this.newCreatedRecipe.newRecipePreview.vegan === true) {
-        alert('Please pay attention! We would appreciate it if you would check again that the recipe is indeed vegan');
+        this.$root.toast("Info"
+        ,'Please pay attention!\n'+
+        ' We would appreciate it if you would check again that the recipe is indeed vegan', "info");
         //this.newCreatedRecipe.vegan = "yes";
       }
       // else{
@@ -227,7 +231,9 @@ export default {
 
     vegetarianCheck(){
       if (this.newCreatedRecipe.newRecipePreview.vegetarian === true) {
-        alert('Please pay attention! We would appreciate it if you would check again that the recipe is indeed vegetarian');
+        this.$root.toast("Info"
+        ,'Please pay attention!\n'+
+        ' We would appreciate it if you would check again that the recipe is indeed vegetarian', "info");
       }
     },
 
