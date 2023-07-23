@@ -12,6 +12,7 @@
 
 <script>
 import RecipePreviewList from "../components/RecipePreviewList";
+
 export default {
   components: {
       RecipePreviewList
