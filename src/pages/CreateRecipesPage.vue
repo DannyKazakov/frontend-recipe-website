@@ -10,10 +10,13 @@
           label-for="recipeName">
           <b-form-input
             id="recipeName"
-            v-model="newCreatedRecipe.newRecipePreview.title"
+            v-model="$v.newCreatedRecipe.newRecipePreview.title.$model"
             type="text"
-            :state="validateRecipeNameState()">
+            :state="validateStatePreviewRecipe('title')">
           </b-form-input>
+          <b-form-invalid-feedback v-if="!$v.newCreatedRecipe.newRecipePreview.title.required">
+          Recipe name is required
+          </b-form-invalid-feedback>
         </b-form-group>
         
         <!-- Preperation time -->
@@ -24,10 +27,13 @@
           label-for="preperationTime">
           <b-form-input
             id="preperationTime"
-            v-model="newCreatedRecipe.newRecipePreview.readyInMinutes"
+            v-model="$v.newCreatedRecipe.newRecipePreview.readyInMinutes.$model"
             type="text"
-            :state="validatePrepTimeState()">
+            :state="validateStatePreviewRecipe('readyInMinutes')">
           </b-form-input>
+          <b-form-invalid-feedback v-if="!$v.newCreatedRecipe.newRecipePreview.readyInMinutes.number">
+          Preperation time must be a number 
+          </b-form-invalid-feedback>
         </b-form-group>
 
         <!-- Amount of dishes -->
@@ -38,10 +44,13 @@
           label-for="dishesAmount">
           <b-form-input
             id="dishesAmount"
-            v-model="newCreatedRecipe.servings"
+            v-model="$v.newCreatedRecipe.servings.$model"
             type="text"
-            :state="validateAmountState()">
+            :state="validateState('servings')">
           </b-form-input>
+          <b-form-invalid-feedback v-if="!$v.newCreatedRecipe.servings.number">
+          servings must be a number 
+          </b-form-invalid-feedback>
         </b-form-group>
 
         <!-- Gluten free -->
@@ -112,19 +121,20 @@
         <div class="rightScreenSide">
           <div class="image">
             <h5>Add an image url:<br></h5>        
-            <input v-model="newCreatedRecipe.newRecipePreview.image">
+            <input v-model="newCreatedRecipe.newRecipePreview.image" style="width: 250px;">
           </div>           
         </div>
         <br>
-
+        
         <b-button type="reset" variant="danger">Clean</b-button>
         <b-button
           type="submit"
           variant="primary"
-          style="width:250px;"
-          class="ml-5 w-75">
+          style="width:250px; margin-left: 10%;"
+          class="w-75">
           Apply
         </b-button>
+
       <br>
       <br>
       </b-form>
@@ -134,7 +144,16 @@
 </template>
 
 <script>
+import {
+  required,
+  minLength,
+  maxLength,
+  alpha,
+  sameAs,
+  email
+} from "vuelidate/lib/validators";
 export default {
+  
   name:"CreateRecipesPage",
   data() {
     return {
@@ -147,9 +166,9 @@ export default {
           id: null,
           title:"",
           readyInMinutes: "",
-          glutenFree: null, 
-          vegan: null,
-          vegetarian: null,
+          glutenFree: false, 
+          vegan: false,
+          vegetarian: false,
           popularity: false,
           wasWatched: false,
           savedToFavourites: false,
@@ -160,7 +179,35 @@ export default {
       }
     }
   },
+  validations: {
+    newCreatedRecipe: {
+      newRecipePreview:
+      {
+        title: {
+        required
+      },
+      readyInMinutes: {
+        required,
+        number: (p) => /^[0-9]*$/.test(p) 
+      }
+      },
+      servings:{
+      required,
+      number: (p) => /^[0-9]*$/.test(p)
+    }
+      
+    }
+
+  },
   methods: {
+    validateStatePreviewRecipe(param) {
+      const { $dirty, $error } = this.$v.newCreatedRecipe.newRecipePreview[param];
+      return $dirty ? !$error : null;
+    },
+    validateState(param) {
+      const { $dirty, $error } = this.$v.newCreatedRecipe[param];
+      return $dirty ? !$error : null;
+    },
     checkGlutenFree(){
       if (this.newCreatedRecipe.newRecipePreview.glutenFree === true) {
         alert('Please pay attention! We would appreciate it if you would check again that the recipe is indeed gluten-free');
@@ -237,14 +284,22 @@ export default {
       }
       return;
     },
+    onAdd(){
+      this.$v.newCreatedRecipe.$touch();
+      if (this.$v.newCreatedRecipe.$anyError) {
+        this.$root.toast("Status", "Illegal Fields entered", "warning");
+        return;
+      }
+      this.Add();
+    },
     
-    async onAdd(){
+    async Add(){
       this.addButtonPressed = true;
-      let recipeName_state = this.validateRecipeNameState();
-      let ingredient_state = this.validateIngredientsState();
-      let instructions_state = this.validateInstructionsState();
-      let preperationTime_state = this.validatePrepTimeState();
-      let dishesAmount_state = this.validateAmountState();
+      // let recipeName_state = this.validateRecipeNameState();
+      // let ingredient_state = this.validateIngredientsState();
+      // let instructions_state = this.validateInstructionsState();
+      // let preperationTime_state = this.validatePrepTimeState();
+      // let dishesAmount_state = this.validateAmountState();
       // if(recipeName_state && ingredient_state && instructions_state && preperationTime_state && dishesAmount_state){
       this.axios.defaults.withCredentials = true
       const response = await this.axios.post(this.$root.store.server_domain + "/users/myRecipes", this.newCreatedRecipe);
@@ -287,8 +342,14 @@ export default {
 </script>
 
 
-<style>
+<style lang="scss">
   .newRecipe{
     font-weight: bold;
   }
+
+  /* Your existing styles */
+  .newRecipe {
+    font-weight: bold;
+  }
+
 </style>

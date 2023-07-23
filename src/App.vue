@@ -40,14 +40,28 @@
     <router-view />
     
 
-    <b-modal ref="newRecipe-modal" hide-footer title="Create a recipe">
+    <!-- <b-modal ref="newRecipe-modal" hide-footer title="Create a recipe">
       <div class="d-block text-center">
         <createRecipesPage v-on:close="hideCreateRecipeModal">
         </createRecipesPage>
       </div>
       <b-button class="mt-3" variant="outline-primary" block @click="hideCreateRecipeModal">Close</b-button>
-    </b-modal>
+    </b-modal> -->
   
+
+    <b-modal ref="newRecipe-modal" hide-footer title="Create a Recipe" id="newRecipe-modal">
+      <div class="modal-body">
+        <createRecipesPage v-on:close="hideCreateRecipeModal">
+        </createRecipesPage>
+      <!-- Your existing form elements -->
+      </div>
+      <div class="modal-footer">
+        <b-button class="mt-3" variant="outline-primary" block @click="hideCreateRecipeModal">Close</b-button>
+      </div>
+   </b-modal>
+
+
+
   </div>
 </template>
 
@@ -128,10 +142,42 @@ export default {
   font-weight: bold;
   margin-left:400px;
 }
-#busa{
-  color: whitesmoke;
 
-  
+#busa{
+  color: whitesmoke;  
+}
+
+
+/* Custom styles for the modal */
+#newRecipe-modal .modal-dialog {
+    max-width: 800px; /* Adjust the width of the modal */
+  }
+
+#newRecipe-modal .modal-content {
+  background-color: #f1f1f1; /* Light gray background for the modal content */
+  border-radius: 10px; /* Rounded corners for the modal */
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.3); /* Add a subtle shadow to the modal */
+}
+
+#newRecipe-modal .modal-header {
+  background-color: #5CDB95; /* A nice green color for the modal header */
+  color: #FFF; /* White text color for the modal header */
+  border-top-left-radius: 10px; /* Adjust the border radius for the top-left corner */
+  border-top-right-radius: 10px; /* Adjust the border radius for the top-right corner */
+}
+
+#newRecipe-modal .modal-title {
+  font-size: 1.5rem;
+}
+
+#newRecipe-modal .modal-body {
+  padding: 20px; /* Add some padding to the modal body */
+}
+
+#newRecipe-modal .modal-footer {
+  background-color: #f1f1f1; /* Light gray background for the modal footer */
+  border-bottom-left-radius: 10px; /* Adjust the border radius for the bottom-left corner */
+  border-bottom-right-radius: 10px; /* Adjust the border radius for the bottom-right corner */
 }
 
 </style>
