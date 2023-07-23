@@ -2,7 +2,6 @@ import Vue from "vue";
 import App from "./App.vue";
 import VueAxios from "vue-axios";
 import axios from "axios";
-
 import routes from "./routes";
 import VueRouter from "vue-router";
 Vue.use(VueRouter);
@@ -21,9 +20,15 @@ import {
   CardPlugin,
   NavbarPlugin,
   FormSelectPlugin,
+  CarouselPlugin,
   AlertPlugin,
   ToastPlugin,
   LayoutPlugin,
+  ListGroupPlugin,
+  TooltipPlugin,
+  SpinnerPlugin,
+  ModalPlugin
+  
 } from "bootstrap-vue";
 [
   FormGroupPlugin,
@@ -32,10 +37,17 @@ import {
   ButtonPlugin,
   CardPlugin,
   NavbarPlugin,
+  CarouselPlugin,
   FormSelectPlugin,
   AlertPlugin,
   ToastPlugin,
   LayoutPlugin,
+  ListGroupPlugin,
+  TooltipPlugin,
+  SpinnerPlugin,
+  ModalPlugin,
+   
+
 ].forEach((x) => Vue.use(x));
 Vue.use(Vuelidate);
 
@@ -76,8 +88,11 @@ const shared_data = {
   logout() {
     console.log("logout");
     localStorage.removeItem("username");
+    localStorage.removeItem("results")
     this.username = undefined;
   },
+  server_domain: "http://localhost:3000"
+  //server_domain: "https://kaza-pai.cs.bgu.ac.il"
 };
 console.log(shared_data);
 // Vue.prototype.$root.store = shared_data;
