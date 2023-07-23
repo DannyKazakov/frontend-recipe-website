@@ -31,6 +31,9 @@
             type="text"
             :state="validateStatePreviewRecipe('readyInMinutes')">
           </b-form-input>
+          <b-form-invalid-feedback v-if="!$v.newCreatedRecipe.newRecipePreview.readyInMinutes.required">
+          Preperation time is required 
+          </b-form-invalid-feedback>
           <b-form-invalid-feedback v-if="!$v.newCreatedRecipe.newRecipePreview.readyInMinutes.number">
           Preperation time must be a number 
           </b-form-invalid-feedback>
@@ -48,6 +51,9 @@
             type="text"
             :state="validateState('servings')">
           </b-form-input>
+          <b-form-invalid-feedback v-if="!$v.newCreatedRecipe.servings.number">
+          servings are required 
+          </b-form-invalid-feedback>
           <b-form-invalid-feedback v-if="!$v.newCreatedRecipe.servings.number">
           servings must be a number 
           </b-form-invalid-feedback>
